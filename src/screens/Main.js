@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View, StyleSheet} from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import AppDimensions from '../helpers/AppDimensions';
 
 export default class Main extends Component {
@@ -10,6 +10,7 @@ export default class Main extends Component {
       {en: 'Three', vn: 'Ba'},
       {en: 'Four', vn: 'Bốn'},
     ];
+
     return (
       <View style={styles.container}>
         {words.map((word) => {
@@ -20,6 +21,11 @@ export default class Main extends Component {
             </View>
           );
         })}
+        {/* <TouchableOpacity
+          ref={(refs) => (this.touchable = refs)}
+          style={{backgroundColor: 'gray'}}>
+          <Text>TouchableOpacity</Text>
+        </TouchableOpacity> */}
       </View>
     );
   }
@@ -28,6 +34,8 @@ export default class Main extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   groupText: {
     flexDirection: 'row',
