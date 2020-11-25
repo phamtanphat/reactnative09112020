@@ -2,12 +2,13 @@
 import React, {Component} from 'react';
 import {StyleSheet, SafeAreaView} from 'react-native';
 import Main from './src/screens/Main';
+import Box from './src/components/Box';
 
 export default class App extends Component {
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <Main />
+        <Box />
       </SafeAreaView>
     );
   }
