@@ -5,10 +5,10 @@ import AppDimensions from '../helpers/AppDimensions';
 export default class Main extends Component {
   render() {
     const words = [
-      {en: 'One', vn: 'Một', isMemorized: true},
-      {en: 'Two', vn: 'Hai', isMemorized: false},
-      {en: 'Three', vn: 'Ba', isMemorized: true},
-      {en: 'Four', vn: 'Bốn', isMemorized: false},
+      {id: 1, en: 'One', vn: 'Một', isMemorized: true},
+      {id: 2, en: 'Two', vn: 'Hai', isMemorized: false},
+      {id: 3, en: 'Three', vn: 'Ba', isMemorized: true},
+      {id: 4, en: 'Four', vn: 'Bốn', isMemorized: false},
     ];
     return (
       <View style={styles.container}>
