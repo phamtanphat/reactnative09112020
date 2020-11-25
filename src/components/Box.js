@@ -4,16 +4,25 @@ import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 export default class Box extends Component {
   constructor(props) {
     super(props);
-    console.log('Contructor');
+    this.state = {
+      count: 0,
+    };
+  }
+  inCrease() {
+    this.setState({count: this.state.count + 1});
   }
   render() {
     console.log('render');
     return (
       <View style={styles.container}>
-        <Text style={styles.textCount}>Count : 0</Text>
+        <Text style={styles.textCount}>Count : {this.state.count} </Text>
         <View>
           <View style={styles.eventgroup}>
-            <TouchableOpacity style={styles.boxIncrease}>
+            <TouchableOpacity
+              onPress={() => {
+                this.inCrease();
+              }}
+              style={styles.boxIncrease}>
               <Text style={styles.increase}>InCrease</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.boxDescrease}>
