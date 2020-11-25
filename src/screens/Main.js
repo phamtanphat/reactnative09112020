@@ -6,22 +6,28 @@ export default class Main extends Component {
   render() {
     const words = [
       {en: 'One', vn: 'Một', isMemorized: true},
-      {en: 'Two', vn: 'Hai'},
-      {en: 'Three', vn: 'Ba'},
-      {en: 'Four', vn: 'Bốn'},
+      {en: 'Two', vn: 'Hai', isMemorized: false},
+      {en: 'Three', vn: 'Ba', isMemorized: true},
+      {en: 'Four', vn: 'Bốn', isMemorized: false},
     ];
     return (
       <View style={styles.container}>
         {words.map((word) => {
+          const isShowVn = word.isMemorized ? '----' : word.vn;
+          const showMemorized = word.isMemorized ? 'Forgot' : 'Memorized';
+          const stylesMemorized = {
+            backgroundColor: word.isMemorized ? 'green' : 'red',
+          };
           return (
             <View style={styles.groupItem}>
               <View style={styles.groupElement}>
                 <Text style={styles.txtStyleEn}>{word.en}</Text>
-                <Text style={styles.txtStyleVn}>{word.vn}</Text>
+                <Text style={styles.txtStyleVn}>{isShowVn}</Text>
               </View>
               <View style={styles.groupElement}>
-                <TouchableOpacity style={styles.touchMemorized}>
-                  <Text style={styles.textMemorized}>Memorized</Text>
+                <TouchableOpacity
+                  style={[styles.touchMemorized, stylesMemorized]}>
+                  <Text style={styles.textMemorized}>{showMemorized}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.touchRemove}>
                   <Text style={styles.textRemove}>Remove</Text>
@@ -67,7 +73,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   touchMemorized: {
-    backgroundColor: 'green',
     padding: 10,
     borderRadius: 5,
   },
@@ -76,5 +81,5 @@ const styles = StyleSheet.create({
   },
   textRemove: {
     fontSize: AppDimensions.getWidth() / 20,
-  }
+  },
 });
