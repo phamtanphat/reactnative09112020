@@ -58,7 +58,7 @@ export default class Main extends Component {
                   style={[styles.touchMemorized, stylesMemorized]}>
                   <Text style={styles.textMemorized}>{showMemorized}</Text>
                 </TouchableOpacity>
-                <TouchableOpacity 
+                <TouchableOpacity
                   onPress={() => this.removeWord(word.id)}
                   style={styles.touchRemove}>
                   <Text style={styles.textRemove}>Remove</Text>
