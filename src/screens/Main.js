@@ -46,6 +46,9 @@ export default class Main extends Component {
     });
     this.setState({words: newWords});
   };
+  toggleForm = () => {
+    this.setState({shouldShowForm: !this.state.shouldShowForm});
+  };
   renderWords = () => {
     return (
       <>
@@ -99,7 +102,9 @@ export default class Main extends Component {
             <TouchableOpacity style={styles.touchableAddword}>
               <Text style={styles.textTouchable}>Add word</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.touchableCancel}>
+            <TouchableOpacity
+              onPress={this.toggleForm}
+              style={styles.touchableCancel}>
               <Text style={styles.textTouchable}>Cancel</Text>
             </TouchableOpacity>
           </View>
@@ -107,7 +112,9 @@ export default class Main extends Component {
       );
     } else {
       return (
-        <TouchableOpacity style={styles.buttonOpenForm}>
+        <TouchableOpacity
+          onPress={this.toggleForm}
+          style={styles.buttonOpenForm}>
           <Text style={styles.textOpenForm}>+</Text>
         </TouchableOpacity>
       );
@@ -116,7 +123,7 @@ export default class Main extends Component {
   render() {
     return (
       <View style={styles.container}>
-        {this.renderForm()}
+        {this.renderForm(this.state.shouldShowForm)}
         {this.renderWords()}
       </View>
     );
