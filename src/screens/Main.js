@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   TextInput,
+  Keyboard,
 } from 'react-native';
 import AppDimensions from '../helpers/AppDimensions';
 
@@ -18,7 +19,7 @@ export default class Main extends Component {
         {id: 3, en: 'Three', vn: 'Ba', isMemorized: true},
         {id: 4, en: 'Four', vn: 'Bốn', isMemorized: false},
       ],
-      shouldShowForm: true,
+      shouldShowForm: false,
       txtEn: '',
       txtVn: '',
     };
@@ -49,6 +50,24 @@ export default class Main extends Component {
   toggleForm = () => {
     this.setState({shouldShowForm: !this.state.shouldShowForm});
   };
+  addWord = () => {
+    const {txtEn, txtVn, words} = this.state;
+    const newWords = Object.assign([], words);
+    if (txtEn.length == 0 || txtVn.length == 0) {
+      return alert('Chưa nhập đủ thông tin');
+    }
+    const newWord = {
+      id: words.length + 1,
+      en: txtEn,
+      vn: txtVn,
+      isMemorized: false,
+    };
+    newWords.unshift(newWord);
+    this.inputTextEn.clear();
+    this.inputTextVn.clear();
+    this.setState({words: newWords});
+    Keyboard.dismiss();
+  }
   renderWords = () => {
     return (
       <>
@@ -88,18 +107,23 @@ export default class Main extends Component {
         <View>
           <View style={styles.containerTextInput}>
             <TextInput
+              ref={(refs) => (this.inputTextEn = refs)}
               placeholder="English"
               onChangeText={(text) => (this.state.txtEn = text)}
               style={styles.textInput}
             />
             <TextInput
+              ref={(refs) => (this.inputTextVn = refs)}
               onChangeText={(text) => (this.state.txtVn = text)}
               placeholder="Vietnamese"
               style={styles.textInput}
+              onSubmitEditing={this.addWord}
             />
           </View>
           <View style={styles.containerTouchable}>
-            <TouchableOpacity style={styles.touchableAddword}>
+            <TouchableOpacity
+              onPress={this.addWord}
+              style={styles.touchableAddword}>
               <Text style={styles.textTouchable}>Add word</Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -120,6 +144,7 @@ export default class Main extends Component {
       );
     }
   };
+
   render() {
     return (
       <View style={styles.container}>
