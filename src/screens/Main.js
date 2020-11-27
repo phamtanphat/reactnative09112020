@@ -28,6 +28,15 @@ export default class Main extends Component {
     });
     this.setState({words: newWords});
   };
+  removeWord = (id) => {
+    const newWords = this.state.words.filter((item) => {
+      if (item.id === id) {
+        return false;
+      }
+      return true;
+    });
+    this.setState({words: newWords});
+  };
   render() {
     return (
       <View style={styles.container}>
@@ -49,7 +58,9 @@ export default class Main extends Component {
                   style={[styles.touchMemorized, stylesMemorized]}>
                   <Text style={styles.textMemorized}>{showMemorized}</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.touchRemove}>
+                <TouchableOpacity 
+                  onPress={() => this.removeWord(word.id)}
+                  style={styles.touchRemove}>
                   <Text style={styles.textRemove}>Remove</Text>
                 </TouchableOpacity>
               </View>
