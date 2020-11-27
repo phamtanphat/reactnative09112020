@@ -11,7 +11,9 @@ export default class Form extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      shouldShowForm: false,
+      shouldShowForm: true,
+      txtEn: '',
+      txtVn: '',
     };
   }
   renderForm = (shouldShowForm) => {
@@ -19,8 +21,16 @@ export default class Form extends Component {
       return (
         <View>
           <View style={styles.containerTextInput}>
-            <TextInput placeholder="English" style={styles.textInput} />
-            <TextInput placeholder="Vietnamese" style={styles.textInput} />
+            <TextInput
+              placeholder="English"
+              onChangeText={(text) => (this.state.txtEn = text)}
+              style={styles.textInput}
+            />
+            <TextInput
+              onChangeText={(text) => (this.state.txtVn = text)}
+              placeholder="Vietnamese"
+              style={styles.textInput}
+            />
           </View>
           <View style={styles.containerTouchable}>
             <TouchableOpacity style={styles.touchableAddword}>
