@@ -3,29 +3,49 @@ import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import AppDimensions from '../helpers/AppDimensions';
 
 export default class Main extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      words: [
+        {id: 1, en: 'One', vn: 'Một', isMemorized: true},
+        {id: 2, en: 'Two', vn: 'Hai', isMemorized: false},
+        {id: 3, en: 'Three', vn: 'Ba', isMemorized: true},
+        {id: 4, en: 'Four', vn: 'Bốn', isMemorized: false},
+      ],
+    };
+  }
+  toggleWord = (id) => {
+    const newWords = this.state.words.map((item) => {
+      if (item.id === id) {
+        const newWord = {
+          ...item,
+          isMemorized: !item.isMemorized,
+        };
+        console.log(newWord);
+        return newWord;
+      }
+      return item;
+    });
+    this.setState({words: newWords});
+  };
   render() {
-    const words = [
-      {id: 1, en: 'One', vn: 'Một', isMemorized: true},
-      {id: 2, en: 'Two', vn: 'Hai', isMemorized: false},
-      {id: 3, en: 'Three', vn: 'Ba', isMemorized: true},
-      {id: 4, en: 'Four', vn: 'Bốn', isMemorized: false},
-    ];
     return (
       <View style={styles.container}>
-        {words.map((word) => {
+        {this.state.words.map((word) => {
           const isShowVn = word.isMemorized ? '----' : word.vn;
           const showMemorized = word.isMemorized ? 'Forgot' : 'Memorized';
           const stylesMemorized = {
             backgroundColor: word.isMemorized ? 'green' : 'red',
           };
           return (
-            <View style={styles.groupItem}>
+            <View style={styles.groupItem} key={word.id}>
               <View style={styles.groupElement}>
                 <Text style={styles.txtStyleEn}>{word.en}</Text>
                 <Text style={styles.txtStyleVn}>{isShowVn}</Text>
               </View>
               <View style={styles.groupElement}>
                 <TouchableOpacity
+                  onPress={() => this.toggleWord(word.id)}
                   style={[styles.touchMemorized, stylesMemorized]}>
                   <Text style={styles.textMemorized}>{showMemorized}</Text>
                 </TouchableOpacity>
