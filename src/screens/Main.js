@@ -1,5 +1,11 @@
 import React, {Component} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  TextInput,
+} from 'react-native';
 import AppDimensions from '../helpers/AppDimensions';
 
 export default class Main extends Component {
@@ -12,6 +18,9 @@ export default class Main extends Component {
         {id: 3, en: 'Three', vn: 'Ba', isMemorized: true},
         {id: 4, en: 'Four', vn: 'Bốn', isMemorized: false},
       ],
+      shouldShowForm: true,
+      txtEn: '',
+      txtVn: '',
     };
   }
   toggleWord = (id) => {
@@ -37,9 +46,9 @@ export default class Main extends Component {
     });
     this.setState({words: newWords});
   };
-  render() {
+  renderWords = () => {
     return (
-      <View style={styles.container}>
+      <>
         {this.state.words.map((word) => {
           const isShowVn = word.isMemorized ? '----' : word.vn;
           const showMemorized = word.isMemorized ? 'Forgot' : 'Memorized';
@@ -67,6 +76,48 @@ export default class Main extends Component {
             </View>
           );
         })}
+      </>
+    );
+  };
+  renderForm = (shouldShowForm) => {
+    if (shouldShowForm) {
+      return (
+        <View>
+          <View style={styles.containerTextInput}>
+            <TextInput
+              placeholder="English"
+              onChangeText={(text) => (this.state.txtEn = text)}
+              style={styles.textInput}
+            />
+            <TextInput
+              onChangeText={(text) => (this.state.txtVn = text)}
+              placeholder="Vietnamese"
+              style={styles.textInput}
+            />
+          </View>
+          <View style={styles.containerTouchable}>
+            <TouchableOpacity style={styles.touchableAddword}>
+              <Text style={styles.textTouchable}>Add word</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.touchableCancel}>
+              <Text style={styles.textTouchable}>Cancel</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      );
+    } else {
+      return (
+        <TouchableOpacity style={styles.buttonOpenForm}>
+          <Text style={styles.textOpenForm}>+</Text>
+        </TouchableOpacity>
+      );
+    }
+  };
+  render() {
+    return (
+      <View style={styles.container}>
+        {this.renderForm()}
+        {this.renderWords()}
       </View>
     );
   }
@@ -75,7 +126,6 @@ export default class Main extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
   },
   groupItem: {
     margin: 5,
@@ -112,5 +162,50 @@ const styles = StyleSheet.create({
   },
   textRemove: {
     fontSize: AppDimensions.getWidth() / 20,
+  },
+  containerTextInput: {
+    width: '100%',
+    height: 150,
+    justifyContent: 'space-evenly',
+  },
+  textInput: {
+    borderWidth: 1,
+    height: 60,
+    fontSize: 20,
+    marginHorizontal: 10,
+    paddingHorizontal: 10,
+  },
+  touchableAddword: {
+    backgroundColor: '#218838',
+    padding: 15,
+    borderRadius: 10,
+  },
+  textTouchable: {
+    color: 'white',
+    fontSize: 20,
+    fontWeight: '500',
+  },
+  touchableCancel: {
+    backgroundColor: 'red',
+    padding: 15,
+    borderRadius: 10,
+  },
+  buttonOpenForm: {
+    marginHorizontal: 10,
+    height: 50,
+    backgroundColor: '#45B157',
+    borderRadius: 5,
+    marginBottom: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  textOpenForm: {
+    color: 'white',
+    fontSize: 30,
+  },
+  containerTouchable: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    marginBottom: 10,
   },
 });

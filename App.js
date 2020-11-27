@@ -9,8 +9,8 @@ export default class App extends Component {
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        {/* <Main /> */}
-        <Form />
+        <Main />
+        {/* <Form /> */}
       </SafeAreaView>
     );
   }
