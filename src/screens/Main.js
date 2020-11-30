@@ -23,6 +23,7 @@ export default class Main extends Component {
       shouldShowForm: false,
       txtEn: '',
       txtVn: '',
+      filterMode: 'Show_All',
     };
   }
   toggleWord = (id) => {
@@ -73,11 +74,18 @@ export default class Main extends Component {
     return (
       <>
         {this.state.words.map((word) => {
+          const {filterMode} = this.state;
           const isShowVn = word.isMemorized ? '----' : word.vn;
           const showMemorized = word.isMemorized ? 'Forgot' : 'Memorized';
           const stylesMemorized = {
             backgroundColor: word.isMemorized ? 'green' : 'red',
           };
+          if (filterMode === 'Show_Forgot' && !word.isMemorized) {
+            return null;
+          }
+          if (filterMode === 'Show_Memorized' && word.isMemorized) {
+            return null;
+          }
           return (
             <View style={styles.groupItem} key={word.id}>
               <View style={styles.groupElement}>
@@ -149,7 +157,7 @@ export default class Main extends Component {
     return (
       <View style={styles.containerPickerStyle}>
         <RNPickerSelect
-          onValueChange={(value) => console.log(value)}
+          onValueChange={(value) => this.setState({filterMode: value})}
           items={[
             {label: 'Show All', value: 'Show_All'},
             {label: 'Show Forgot', value: 'Show_Forgot'},
