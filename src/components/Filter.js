@@ -8,7 +8,7 @@ export default class Filter extends Component {
       <View style={styles.containerPickerStyle}>
         <RNPickerSelect
           value={this.props.filterMode}
-          onValueChange={value => _}
+          onValueChange={value => console.log(value)}
           items={[
             {label: 'Show All', value: 'Show_All'},
             {label: 'Show Forgot', value: 'Show_Forgot'},
