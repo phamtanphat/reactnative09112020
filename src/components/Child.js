@@ -6,7 +6,9 @@ export default class Child extends Component {
     return (
       <View>
         <View style={styles.eventgroup}>
-          <TouchableOpacity style={styles.boxIncrease}>
+          <TouchableOpacity
+            onPress={() => this.props.onInCrease()}
+            style={styles.boxIncrease}>
             <Text style={styles.increase}>InCrease</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.boxDescrease}>

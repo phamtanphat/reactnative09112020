@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
+import {Text, View, StyleSheet} from 'react-native';
 import Child from './Child';
 export default class Box extends Component {
   constructor(props) {
@@ -8,15 +8,15 @@ export default class Box extends Component {
       count: 0,
     };
   }
-  inCrease() {
+  onInCrease = () => {
     this.setState({count: this.state.count + 1});
-  }
+  };
   render() {
     console.log('render');
     return (
       <View style={styles.container}>
         <Text style={styles.textCount}>Count : {this.state.count} </Text>
-        <Child />
+        <Child onInCrease={this.onInCrease} />
       </View>
     );
   }
