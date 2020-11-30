@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
-
+import Child from './Child';
 export default class Box extends Component {
   constructor(props) {
     super(props);
@@ -16,23 +16,7 @@ export default class Box extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.textCount}>Count : {this.state.count} </Text>
-        <View>
-          <View style={styles.eventgroup}>
-            <TouchableOpacity
-              onPress={() => {
-                this.inCrease();
-              }}
-              style={styles.boxIncrease}>
-              <Text style={styles.increase}>InCrease</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.boxDescrease}>
-              <Text style={styles.descrease}>DeCrease</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.boxReset}>
-              <Text style={styles.reset}>Reset</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
+        <Child />
       </View>
     );
   }
@@ -50,38 +34,5 @@ const styles = StyleSheet.create({
   textCount: {
     fontSize: 30,
     color: 'red',
-  },
-  eventgroup: {
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    marginTop: 20,
-  },
-  boxIncrease: {
-    borderRadius: 10,
-    backgroundColor: 'green',
-  },
-  boxDescrease: {
-    borderRadius: 10,
-    backgroundColor: 'red',
-  },
-  boxReset: {
-    borderRadius: 10,
-    backgroundColor: 'orange',
-  },
-  increase: {
-    fontSize: 20,
-    padding: 10,
-    color: 'white',
-  },
-  descrease: {
-    fontSize: 20,
-    padding: 10,
-    color: 'white',
-  },
-  reset: {
-    fontSize: 20,
-    padding: 10,
-    color: 'white',
   },
 });
