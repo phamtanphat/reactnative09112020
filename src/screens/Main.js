@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import AppDimensions from '../helpers/AppDimensions';
 import RNPickerSelect from 'react-native-picker-select';
+import Word from '../components/Word';
 
 export default class Main extends Component {
   constructor(props) {
@@ -172,7 +173,7 @@ export default class Main extends Component {
       <View style={styles.container}>
         {this.renderForm(this.state.shouldShowForm)}
         {this.renderFilter()}
-        {this.renderWords()}
+        <Word words={this.state.words} />
       </View>
     );
   }

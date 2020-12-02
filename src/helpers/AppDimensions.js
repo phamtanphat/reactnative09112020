@@ -4,10 +4,10 @@ function getWidth() {
   return Dimensions.get('window').width;
 }
 
-function getHight() {
+function getHeight() {
   return Dimensions.get('window').height;
 }
 
-const AppDimensions = {getWidth, getHight};
+const AppDimensions = {getWidth, getHeight};
 
 export default AppDimensions;

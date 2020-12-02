@@ -1,39 +1,17 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
-import {Text, View, FlatList} from 'react-native';
+import {FlatList, View} from 'react-native';
+import WordItem from './WordItem';
 
 export default class Word extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      words: [
-        {id: 1, en: 'One', vn: 'Một', isMemorized: true},
-        {id: 2, en: 'Two', vn: 'Hai', isMemorized: false},
-        {id: 3, en: 'Three', vn: 'Ba', isMemorized: true},
-        {id: 4, en: 'Four', vn: 'Bốn', isMemorized: false},
-      ],
-      isRefreshing: false,
-    };
-  }
   render() {
     return (
-      <View>
+      <View style={{flex: 1, justifyContent: 'center'}}>
         <FlatList
-          data={this.state.words}
-          keyExtractor={(item) => item.id.toString()}
-          extraData={this.state.words}
-          renderItem={({item, index}) => {
-            return <Text>{item.en}</Text>;
-          }}
-          ItemSeparatorComponent={() => (
-            <View style={{backgroundColor: 'red', height: 1, width: '100%'}} />
-          )}
-          refreshing={this.state.isRefreshing}
-          onRefresh={() => {
-            this.setState({isRefreshing: true});
-            setTimeout(() => {
-              this.setState({isRefreshing: false});
-            }, 2000);
-          }}
+          data={this.props.words}
+          extraData={this.props.words}
+          keyExtractor={(item, index) => item.id.toString()}
+          renderItem={({item}) => <WordItem item={item} />}
         />
       </View>
     );

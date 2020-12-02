@@ -13,7 +13,7 @@ export default class App extends Component {
       <SafeAreaView style={styles.container}>
         {/* <Box /> */}
         {/* <Form /> */}
-        <Word />
+        <Main />
       </SafeAreaView>
     );
   }
