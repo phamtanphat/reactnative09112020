@@ -12,7 +12,7 @@ export default class Box extends Component {
     this.setState({count: this.state.count + 1});
   };
   render() {
-    console.log('render');
+    console.log('Render Box');
     return (
       <View style={styles.container}>
         <Text style={styles.textCount}>Count : {this.state.count} </Text>

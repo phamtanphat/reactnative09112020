@@ -2,7 +2,12 @@ import React, {Component} from 'react';
 import {Text, View, TouchableOpacity, StyleSheet} from 'react-native';
 
 export default class Child extends Component {
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log(nextProps);
+    return true;
+  }
   render() {
+    console.log('Render Child');
     return (
       <View>
         <View style={styles.eventgroup}>
