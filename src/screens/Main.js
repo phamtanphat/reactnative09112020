@@ -10,6 +10,8 @@ import {
 import AppDimensions from '../helpers/AppDimensions';
 import RNPickerSelect from 'react-native-picker-select';
 import Word from '../components/Word';
+import Form from '../components/Form';
+import Filter from '../components/Filter';
 
 export default class Main extends Component {
   constructor(props) {
@@ -24,7 +26,7 @@ export default class Main extends Component {
       shouldShowForm: false,
       txtEn: '',
       txtVn: '',
-      filterMode: 'Show_All',
+      filterMode: '',
     };
   }
   toggleWord = (id) => {
@@ -171,9 +173,9 @@ export default class Main extends Component {
   render() {
     return (
       <View style={styles.container}>
-        {this.renderForm(this.state.shouldShowForm)}
-        {this.renderFilter()}
-        <Word words={this.state.words} />
+        <Form shouldShowForm={this.state.shouldShowForm} />
+        <Filter filterMode={this.state.filterMode} />
+        <Word words={this.state.words} filterMode={this.state.filterMode} />
       </View>
     );
   }

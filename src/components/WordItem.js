@@ -4,7 +4,12 @@ import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import AppDimensions from '../helpers/AppDimensions';
 
 export default class WordItem extends Component {
-  renderItemWord = (word) => {
+  renderItemWord = (word, filterMode) => {
+    if (filterMode === 'Show_Forgot' && !word.isMemorized) {
+      return null;
+    } else if (filterMode === 'Show_Memorized' && word.isMemorized) {
+      return null;
+    }
     return (
       <View style={styles.containerWord} key={word.id.toString()}>
         <View style={styles.containerText}>
@@ -31,7 +36,7 @@ export default class WordItem extends Component {
     );
   };
   render() {
-    return this.renderItemWord(this.props.item);
+    return this.renderItemWord(this.props.item, this.props.filterMode);
   }
 }
 

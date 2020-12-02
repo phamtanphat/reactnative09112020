@@ -11,7 +11,6 @@ export default class Form extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      shouldShowForm: true,
       txtEn: '',
       txtVn: '',
     };
@@ -51,7 +50,7 @@ export default class Form extends Component {
     }
   };
   render() {
-    return this.renderForm(this.state.shouldShowForm);
+    return this.renderForm(this.props.shouldShowForm);
   }
 }
 

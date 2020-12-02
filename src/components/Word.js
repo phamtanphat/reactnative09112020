@@ -11,7 +11,9 @@ export default class Word extends Component {
           data={this.props.words}
           extraData={this.props.words}
           keyExtractor={(item, index) => item.id.toString()}
-          renderItem={({item}) => <WordItem item={item} />}
+          renderItem={({item}) => (
+            <WordItem item={item} filterMode={this.props.filterMode} />
+          )}
         />
       </View>
     );
