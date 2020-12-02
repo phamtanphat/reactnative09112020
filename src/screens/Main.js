@@ -1,14 +1,6 @@
 import React, {Component} from 'react';
-import {
-  Text,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  TextInput,
-  Keyboard,
-} from 'react-native';
+import {View, StyleSheet, Keyboard} from 'react-native';
 import AppDimensions from '../helpers/AppDimensions';
-import RNPickerSelect from 'react-native-picker-select';
 import Word from '../components/Word';
 import Form from '../components/Form';
 import Filter from '../components/Filter';
@@ -29,14 +21,13 @@ export default class Main extends Component {
       filterMode: '',
     };
   }
-  toggleWord = (id) => {
+  onToggleWord = (id) => {
     const newWords = this.state.words.map((item) => {
       if (item.id === id) {
         const newWord = {
           ...item,
           isMemorized: !item.isMemorized,
         };
-        console.log(newWord);
         return newWord;
       }
       return item;
@@ -73,109 +64,16 @@ export default class Main extends Component {
     this.setState({words: newWords});
     Keyboard.dismiss();
   };
-  renderWords = () => {
-    return (
-      <>
-        {this.state.words.map((word) => {
-          const {filterMode} = this.state;
-          const isShowVn = word.isMemorized ? '----' : word.vn;
-          const showMemorized = word.isMemorized ? 'Forgot' : 'Memorized';
-          const stylesMemorized = {
-            backgroundColor: word.isMemorized ? 'green' : 'red',
-          };
-          if (filterMode === 'Show_Forgot' && !word.isMemorized) {
-            return null;
-          }
-          if (filterMode === 'Show_Memorized' && word.isMemorized) {
-            return null;
-          }
-          return (
-            <View style={styles.groupItem} key={word.id}>
-              <View style={styles.groupElement}>
-                <Text style={styles.txtStyleEn}>{word.en}</Text>
-                <Text style={styles.txtStyleVn}>{isShowVn}</Text>
-              </View>
-              <View style={styles.groupElement}>
-                <TouchableOpacity
-                  onPress={() => this.toggleWord(word.id)}
-                  style={[styles.touchMemorized, stylesMemorized]}>
-                  <Text style={styles.textMemorized}>{showMemorized}</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => this.removeWord(word.id)}
-                  style={styles.touchRemove}>
-                  <Text style={styles.textRemove}>Remove</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          );
-        })}
-      </>
-    );
-  };
-  renderForm = (shouldShowForm) => {
-    if (shouldShowForm) {
-      return (
-        <View>
-          <View style={styles.containerTextInput}>
-            <TextInput
-              ref={(refs) => (this.inputTextEn = refs)}
-              placeholder="English"
-              onChangeText={(text) => (this.state.txtEn = text)}
-              style={styles.textInput}
-            />
-            <TextInput
-              ref={(refs) => (this.inputTextVn = refs)}
-              onChangeText={(text) => (this.state.txtVn = text)}
-              placeholder="Vietnamese"
-              style={styles.textInput}
-              onSubmitEditing={this.addWord}
-            />
-          </View>
-          <View style={styles.containerTouchable}>
-            <TouchableOpacity
-              onPress={this.addWord}
-              style={styles.touchableAddword}>
-              <Text style={styles.textTouchable}>Add word</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={this.toggleForm}
-              style={styles.touchableCancel}>
-              <Text style={styles.textTouchable}>Cancel</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      );
-    } else {
-      return (
-        <TouchableOpacity
-          onPress={this.toggleForm}
-          style={styles.buttonOpenForm}>
-          <Text style={styles.textOpenForm}>+</Text>
-        </TouchableOpacity>
-      );
-    }
-  };
-  renderFilter = () => {
-    return (
-      <View style={styles.containerPickerStyle}>
-        <RNPickerSelect
-          onValueChange={(value) => this.setState({filterMode: value})}
-          items={[
-            {label: 'Show All', value: 'Show_All'},
-            {label: 'Show Forgot', value: 'Show_Forgot'},
-            {label: 'Show Memorized', value: 'Show_Memorized'},
-          ]}
-        />
-      </View>
-    );
-  };
   render() {
     return (
       <View style={styles.container}>
         <Form shouldShowForm={this.state.shouldShowForm} />
         <Filter filterMode={this.state.filterMode} />
-        <Word words={this.state.words} filterMode={this.state.filterMode} />
+        <Word
+          onToggleWord={this.onToggleWord}
+          words={this.state.words}
+          filterMode={this.state.filterMode}
+        />
       </View>
     );
   }

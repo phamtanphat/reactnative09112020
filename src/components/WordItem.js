@@ -4,6 +4,12 @@ import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import AppDimensions from '../helpers/AppDimensions';
 
 export default class WordItem extends Component {
+  shouldComponentUpdate(nextProps, nextState) {
+    if (nextProps.item.isMemorized === this.props.item.isMemorized) {
+      return false;
+    }
+    return true;
+  }
   renderItemWord = (word, filterMode) => {
     if (filterMode === 'Show_Forgot' && !word.isMemorized) {
       return null;
@@ -20,6 +26,7 @@ export default class WordItem extends Component {
         </View>
         <View style={styles.containerTouchable}>
           <TouchableOpacity
+            onPress={() => this.props.onToggleWord(word.id)}
             style={{
               ...styles.touchableMemorized,
               backgroundColor: word.isMemorized ? '#28a845' : '#DD3444',
