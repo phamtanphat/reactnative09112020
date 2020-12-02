@@ -1,11 +1,7 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {Text, View, TouchableOpacity, StyleSheet} from 'react-native';
 
-export default class Child extends Component {
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log(nextProps);
-    return true;
-  }
+export default class Child extends PureComponent {
   render() {
     console.log('Render Child');
     return (
