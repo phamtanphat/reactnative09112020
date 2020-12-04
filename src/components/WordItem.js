@@ -48,7 +48,6 @@ export default class WordItem extends Component {
     );
   };
   render() {
-    console.log('Render Word');
     return this.renderItemWord(this.props.item, this.props.filterMode);
   }
 }
