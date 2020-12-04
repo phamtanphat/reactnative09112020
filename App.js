@@ -7,17 +7,11 @@ import Form from './src/components/Form';
 import Filter from './src/components/Filter';
 import Word from './src/components/Word';
 import {createStore} from 'redux';
+import {Provider} from 'react-redux';
 
-const store = createStore(function (state = {count: 1}, action) {
-  if (action.type === 'INCREASE') {
-    return {count: action.data + state.count};
-  }
+const store = createStore(function (state = {count: 10}, action) {
   return state;
 });
-
-console.log(store.getState());
-store.dispatch({type: 'INCREASE', data: 1});
-console.log(store.getState());
 
 export default class App extends Component {
   render() {
@@ -25,7 +19,9 @@ export default class App extends Component {
       <SafeAreaView style={styles.container}>
         {/* <Box /> */}
         {/* <Form /> */}
-        <Main />
+        <Provider store={store}>
+          <Box />
+        </Provider>
       </SafeAreaView>
     );
   }
