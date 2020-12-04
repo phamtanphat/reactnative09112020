@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   TextInput,
+  Keyboard,
 } from 'react-native';
 
 export default class Form extends Component {
@@ -15,6 +16,17 @@ export default class Form extends Component {
       txtVn: '',
     };
   }
+  addWord = () => {
+    const {txtEn, txtVn} = this.state;
+    if (txtEn.length === 0 || txtVn.length === 0) {
+      return alert('Chưa nhập đủ thông tin');
+    }
+    this.props.onAddWord(txtEn, txtVn, () => {
+      this.inputTextEn.clear();
+      this.inputTextVn.clear();
+      Keyboard.dismiss();
+    });
+  };
   renderForm = (shouldShowForm) => {
     if (shouldShowForm) {
       return (
@@ -24,18 +36,24 @@ export default class Form extends Component {
               placeholder="English"
               onChangeText={(text) => (this.state.txtEn = text)}
               style={styles.textInput}
+              ref={(refs) => (this.inputTextEn = refs)}
             />
             <TextInput
               onChangeText={(text) => (this.state.txtVn = text)}
               placeholder="Vietnamese"
               style={styles.textInput}
+              ref={(refs) => (this.inputTextVn = refs)}
             />
           </View>
           <View style={styles.containerTouchable}>
-            <TouchableOpacity style={styles.touchableAddword}>
+            <TouchableOpacity
+              onPress={this.addWord}
+              style={styles.touchableAddword}>
               <Text style={styles.textTouchable}>Add word</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.touchableCancel}>
+            <TouchableOpacity
+              onPress={this.props.onToggleForm}
+              style={styles.touchableCancel}>
               <Text style={styles.textTouchable}>Cancel</Text>
             </TouchableOpacity>
           </View>
@@ -43,7 +61,9 @@ export default class Form extends Component {
       );
     } else {
       return (
-        <TouchableOpacity style={styles.buttonOpenForm}>
+        <TouchableOpacity
+          onPress={this.props.onToggleForm}
+          style={styles.buttonOpenForm}>
           <Text style={styles.textOpenForm}>+</Text>
         </TouchableOpacity>
       );

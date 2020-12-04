@@ -16,6 +16,7 @@ export default class Word extends Component {
               item={item}
               filterMode={this.props.filterMode}
               onToggleWord={this.props.onToggleWord}
+              onRemoveWord={this.props.onRemoveWord}
             />
           )}
         />

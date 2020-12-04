@@ -16,8 +16,6 @@ export default class Main extends Component {
         {id: 4, en: 'Four', vn: 'Bốn', isMemorized: false},
       ],
       shouldShowForm: false,
-      txtEn: '',
-      txtVn: '',
       filterMode: '',
     };
   }
@@ -34,7 +32,7 @@ export default class Main extends Component {
     });
     this.setState({words: newWords});
   };
-  removeWord = (id) => {
+  onRemoveWord = (id) => {
     const newWords = this.state.words.filter((item) => {
       if (item.id === id) {
         return false;
@@ -43,15 +41,12 @@ export default class Main extends Component {
     });
     this.setState({words: newWords});
   };
-  toggleForm = () => {
+  onToggleForm = () => {
     this.setState({shouldShowForm: !this.state.shouldShowForm});
   };
-  addWord = () => {
-    const {txtEn, txtVn, words} = this.state;
+  onAddWord = (txtEn, txtVn, cb) => {
+    const {words} = this.state;
     const newWords = Object.assign([], words);
-    if (txtEn.length == 0 || txtVn.length == 0) {
-      return alert('Chưa nhập đủ thông tin');
-    }
     const newWord = {
       id: words.length + 1,
       en: txtEn,
@@ -59,17 +54,19 @@ export default class Main extends Component {
       isMemorized: false,
     };
     newWords.unshift(newWord);
-    this.inputTextEn.clear();
-    this.inputTextVn.clear();
-    this.setState({words: newWords});
-    Keyboard.dismiss();
+    this.setState({words: newWords}, cb);
   };
   render() {
     return (
       <View style={styles.container}>
-        <Form shouldShowForm={this.state.shouldShowForm} />
+        <Form
+          onAddWord={this.onAddWord}
+          onToggleForm={this.onToggleForm}
+          shouldShowForm={this.state.shouldShowForm}
+        />
         <Filter filterMode={this.state.filterMode} />
         <Word
+          onRemoveWord={this.onRemoveWord}
           onToggleWord={this.onToggleWord}
           words={this.state.words}
           filterMode={this.state.filterMode}

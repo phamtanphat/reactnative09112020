@@ -35,7 +35,9 @@ export default class WordItem extends Component {
               {word.isMemorized ? 'Forgot' : 'Memorized'}
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.touchableRemove}>
+          <TouchableOpacity
+            onPress={() => this.props.onRemoveWord(word.id)}
+            style={styles.touchableRemove}>
             <Text style={styles.textSize}>Remove</Text>
           </TouchableOpacity>
         </View>
