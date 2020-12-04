@@ -5,7 +5,10 @@ import AppDimensions from '../helpers/AppDimensions';
 
 export default class WordItem extends Component {
   shouldComponentUpdate(nextProps, nextState) {
-    if (nextProps.item.isMemorized === this.props.item.isMemorized) {
+    if (
+      nextProps.item.isMemorized === this.props.item.isMemorized &&
+      nextProps.filterMode === this.props.filterMode
+    ) {
       return false;
     }
     return true;
@@ -45,6 +48,7 @@ export default class WordItem extends Component {
     );
   };
   render() {
+    console.log('Render Word');
     return this.renderItemWord(this.props.item, this.props.filterMode);
   }
 }

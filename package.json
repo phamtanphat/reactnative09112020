@@ -13,7 +13,8 @@
     "@react-native-community/picker": "^1.8.1",
     "react": "16.13.1",
     "react-native": "0.63.3",
-    "react-native-picker-select": "^8.0.3"
+    "react-native-picker-select": "^8.0.3",
+    "redux": "^4.0.5"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",

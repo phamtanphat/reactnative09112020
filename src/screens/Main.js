@@ -56,6 +56,9 @@ export default class Main extends Component {
     newWords.unshift(newWord);
     this.setState({words: newWords}, cb);
   };
+  onSetFilterMode = (filterMode) => {
+    this.setState({filterMode});
+  };
   render() {
     return (
       <View style={styles.container}>
@@ -64,7 +67,10 @@ export default class Main extends Component {
           onToggleForm={this.onToggleForm}
           shouldShowForm={this.state.shouldShowForm}
         />
-        <Filter filterMode={this.state.filterMode} />
+        <Filter
+          onSetFilterMode={this.onSetFilterMode}
+          filterMode={this.state.filterMode}
+        />
         <Word
           onRemoveWord={this.onRemoveWord}
           onToggleWord={this.onToggleWord}

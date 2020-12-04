@@ -9,7 +9,7 @@ export default class Word extends Component {
       <View style={{flex: 1, justifyContent: 'center'}}>
         <FlatList
           data={this.props.words}
-          extraData={this.props.words}
+          extraData={this.props.filterMode}
           keyExtractor={(item, index) => item.id.toString()}
           renderItem={({item}) => (
             <WordItem
