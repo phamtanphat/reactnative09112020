@@ -9,8 +9,17 @@ import Word from './src/components/Word';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 
-const store = createStore(function (state = {count: 10}, action) {
-  return state;
+const store = createStore((state = {count: 10}, action) => {
+  switch (action.type) {
+    case 'INCREASE':
+      return {count: state.count + 1};
+    case 'DECREASE':
+      return {count: state.count - 1};
+    case 'RESET':
+      return {count: 0};
+    default:
+      return state;
+  }
 });
 
 export default class App extends Component {

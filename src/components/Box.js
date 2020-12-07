@@ -9,7 +9,7 @@ class Box extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.textCount}>Count : {this.props.count} </Text>
-        <Child onInCrease={this.onInCrease} />
+        <Child />
       </View>
     );
   }
