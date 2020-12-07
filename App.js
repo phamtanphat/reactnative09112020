@@ -20,7 +20,28 @@ const defaultState = {
   filterMode: '',
 };
 const store = createStore((state = defaultState, action) => {
+  let newWords = null;
   switch (action.type) {
+    case 'TOGGLE_WORD':
+      newWords = state.words.map((item) => {
+        if (item.id === action.id) {
+          const newWord = {
+            ...item,
+            isMemorized: !item.isMemorized,
+          };
+          return newWord;
+        }
+        return item;
+      });
+      return {...state, words: newWords};
+    case 'REMOVE_WORD':
+      newWords = state.words.filter((item) => {
+        if (item.id === action.id) {
+          return false;
+        }
+        return true;
+      });
+      return {...state, words: newWords};
     default:
       return state;
   }

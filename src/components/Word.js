@@ -5,6 +5,12 @@ import WordItem from './WordItem';
 import {connect} from 'react-redux';
 
 class Word extends Component {
+  onToggleWord = (id) => {
+    this.props.dispatch({type: 'TOGGLE_WORD', id});
+  };
+  onRemoveWord = (id) => {
+    this.props.dispatch({type: 'REMOVE_WORD', id});
+  };
   render() {
     return (
       <View style={{flex: 1, justifyContent: 'center'}}>
@@ -16,8 +22,8 @@ class Word extends Component {
             <WordItem
               item={item}
               filterMode={this.props.filterMode}
-              onToggleWord={this.props.onToggleWord}
-              onRemoveWord={this.props.onRemoveWord}
+              onToggleWord={this.onToggleWord}
+              onRemoveWord={this.onRemoveWord}
             />
           )}
         />

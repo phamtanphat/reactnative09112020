@@ -6,19 +6,6 @@ import Form from '../components/Form';
 import Filter from '../components/Filter';
 
 export default class Main extends Component {
-  onToggleWord = (id) => {
-    const newWords = this.state.words.map((item) => {
-      if (item.id === id) {
-        const newWord = {
-          ...item,
-          isMemorized: !item.isMemorized,
-        };
-        return newWord;
-      }
-      return item;
-    });
-    this.setState({words: newWords});
-  };
   onRemoveWord = (id) => {
     const newWords = this.state.words.filter((item) => {
       if (item.id === id) {
