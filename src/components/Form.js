@@ -15,6 +15,7 @@ class Form extends Component {
     this.state = {
       txtEn: '',
       txtVn: '',
+      shouldShowForm: false,
     };
   }
   addWord = () => {
@@ -22,11 +23,13 @@ class Form extends Component {
     if (txtEn.length === 0 || txtVn.length === 0) {
       return alert('Chưa nhập đủ thông tin');
     }
-    this.props.onAddWord(txtEn, txtVn, () => {
-      this.inputTextEn.clear();
-      this.inputTextVn.clear();
-      Keyboard.dismiss();
-    });
+    this.props.dispatch({type: 'ADD_WORD', txtEn, txtVn});
+    this.inputTextEn.clear();
+    this.inputTextVn.clear();
+    Keyboard.dismiss();
+  };
+  toggleForm = () => {
+    this.setState({shouldShowForm: !this.state.shouldShowForm});
   };
   renderForm = (shouldShowForm) => {
     if (shouldShowForm) {
@@ -53,7 +56,7 @@ class Form extends Component {
               <Text style={styles.textTouchable}>Add word</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={this.props.onToggleForm}
+              onPress={this.toggleForm}
               style={styles.touchableCancel}>
               <Text style={styles.textTouchable}>Cancel</Text>
             </TouchableOpacity>
@@ -63,7 +66,7 @@ class Form extends Component {
     } else {
       return (
         <TouchableOpacity
-          onPress={this.props.onToggleForm}
+          onPress={this.toggleForm}
           style={styles.buttonOpenForm}>
           <Text style={styles.textOpenForm}>+</Text>
         </TouchableOpacity>
@@ -71,15 +74,12 @@ class Form extends Component {
     }
   };
   render() {
-    return this.renderForm(this.props.shouldShowForm);
+    return this.renderForm(this.state.shouldShowForm);
   }
 }
 
-const mapStateToProps = (state) => {
-  return {shouldShowForm: state.shouldShowForm};
-};
+export default connect()(Form);
 
-export default connect(mapStateToProps)(Form);
 const styles = StyleSheet.create({
   containerTextInput: {
     width: '100%',

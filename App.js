@@ -16,7 +16,6 @@ const defaultState = {
     {id: 3, en: 'Three', vn: 'Ba', isMemorized: true},
     {id: 4, en: 'Four', vn: 'Bốn', isMemorized: false},
   ],
-  shouldShowForm: false,
   filterMode: '',
 };
 const store = createStore((state = defaultState, action) => {
@@ -42,6 +41,19 @@ const store = createStore((state = defaultState, action) => {
         return true;
       });
       return {...state, words: newWords};
+    case 'ADD_WORD':
+      const {words} = state;
+      newWords = Object.assign([], words);
+      const newWord = {
+        id: words.length + 1,
+        en: action.txtEn,
+        vn: action.txtVn,
+        isMemorized: false,
+      };
+      newWords.unshift(newWord);
+      return {...state, words: newWords};
+    case 'SET_FILTER_MODE':
+      return {...state, filterMode: action.filterMode};
     default:
       return state;
   }

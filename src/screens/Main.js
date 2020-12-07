@@ -6,33 +6,6 @@ import Form from '../components/Form';
 import Filter from '../components/Filter';
 
 export default class Main extends Component {
-  onRemoveWord = (id) => {
-    const newWords = this.state.words.filter((item) => {
-      if (item.id === id) {
-        return false;
-      }
-      return true;
-    });
-    this.setState({words: newWords});
-  };
-  onToggleForm = () => {
-    this.setState({shouldShowForm: !this.state.shouldShowForm});
-  };
-  onAddWord = (txtEn, txtVn, cb) => {
-    const {words} = this.state;
-    const newWords = Object.assign([], words);
-    const newWord = {
-      id: words.length + 1,
-      en: txtEn,
-      vn: txtVn,
-      isMemorized: false,
-    };
-    newWords.unshift(newWord);
-    this.setState({words: newWords}, cb);
-  };
-  onSetFilterMode = (filterMode) => {
-    this.setState({filterMode});
-  };
   render() {
     return (
       <View style={styles.container}>
