@@ -6,19 +6,6 @@ import Form from '../components/Form';
 import Filter from '../components/Filter';
 
 export default class Main extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      words: [
-        {id: 1, en: 'One', vn: 'Một', isMemorized: true},
-        {id: 2, en: 'Two', vn: 'Hai', isMemorized: false},
-        {id: 3, en: 'Three', vn: 'Ba', isMemorized: true},
-        {id: 4, en: 'Four', vn: 'Bốn', isMemorized: false},
-      ],
-      shouldShowForm: false,
-      filterMode: '',
-    };
-  }
   onToggleWord = (id) => {
     const newWords = this.state.words.map((item) => {
       if (item.id === id) {
@@ -62,15 +49,8 @@ export default class Main extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Form
-          onAddWord={this.onAddWord}
-          onToggleForm={this.onToggleForm}
-          shouldShowForm={this.state.shouldShowForm}
-        />
-        <Filter
-          onSetFilterMode={this.onSetFilterMode}
-          filterMode={this.state.filterMode}
-        />
+        <Form />
+        <Filter />
         <Word />
       </View>
     );

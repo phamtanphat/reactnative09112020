@@ -7,8 +7,9 @@ import {
   TextInput,
   Keyboard,
 } from 'react-native';
+import {connect} from 'react-redux';
 
-export default class Form extends Component {
+class Form extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -74,6 +75,11 @@ export default class Form extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {shouldShowForm: state.shouldShowForm};
+};
+
+export default connect(mapStateToProps)(Form);
 const styles = StyleSheet.create({
   containerTextInput: {
     width: '100%',
