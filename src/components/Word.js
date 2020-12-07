@@ -2,8 +2,9 @@
 import React, {Component} from 'react';
 import {FlatList, View} from 'react-native';
 import WordItem from './WordItem';
+import {connect} from 'react-redux';
 
-export default class Word extends Component {
+class Word extends Component {
   render() {
     return (
       <View style={{flex: 1, justifyContent: 'center'}}>
@@ -24,3 +25,9 @@ export default class Word extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {words: state.words, filterMode: state.filterMode};
+};
+
+export default connect(mapStateToProps)(Word);

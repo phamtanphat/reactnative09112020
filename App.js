@@ -9,14 +9,18 @@ import Word from './src/components/Word';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 
-const store = createStore((state = {count: 10}, action) => {
+const defaultState = {
+  words: [
+    {id: 1, en: 'One', vn: 'Một', isMemorized: true},
+    {id: 2, en: 'Two', vn: 'Hai', isMemorized: false},
+    {id: 3, en: 'Three', vn: 'Ba', isMemorized: true},
+    {id: 4, en: 'Four', vn: 'Bốn', isMemorized: false},
+  ],
+  shouldShowForm: false,
+  filterMode: '',
+};
+const store = createStore((state = defaultState, action) => {
   switch (action.type) {
-    case 'INCREASE':
-      return {count: state.count + 1};
-    case 'DECREASE':
-      return {count: state.count - 1};
-    case 'RESET':
-      return {count: 0};
     default:
       return state;
   }
@@ -29,7 +33,7 @@ export default class App extends Component {
         {/* <Box /> */}
         {/* <Form /> */}
         <Provider store={store}>
-          <Box />
+          <Main />
         </Provider>
       </SafeAreaView>
     );

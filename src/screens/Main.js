@@ -71,12 +71,7 @@ export default class Main extends Component {
           onSetFilterMode={this.onSetFilterMode}
           filterMode={this.state.filterMode}
         />
-        <Word
-          onRemoveWord={this.onRemoveWord}
-          onToggleWord={this.onToggleWord}
-          words={this.state.words}
-          filterMode={this.state.filterMode}
-        />
+        <Word />
       </View>
     );
   }
