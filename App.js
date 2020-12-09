@@ -6,58 +6,29 @@ import Box from './src/components/Box';
 import Form from './src/components/Form';
 import Filter from './src/components/Filter';
 import Word from './src/components/Word';
-import {createStore} from 'redux';
+import {createStore, combineReducers} from 'redux';
 import {Provider} from 'react-redux';
 
-const defaultState = {
-  words: [
-    {id: 1, en: 'One', vn: 'Một', isMemorized: true},
-    {id: 2, en: 'Two', vn: 'Hai', isMemorized: false},
-    {id: 3, en: 'Three', vn: 'Ba', isMemorized: true},
-    {id: 4, en: 'Four', vn: 'Bốn', isMemorized: false},
-  ],
-  filterMode: '',
-};
-const store = createStore((state = defaultState, action) => {
-  let newWords = null;
-  switch (action.type) {
-    case 'TOGGLE_WORD':
-      newWords = state.words.map((item) => {
-        if (item.id === action.id) {
-          const newWord = {
-            ...item,
-            isMemorized: !item.isMemorized,
-          };
-          return newWord;
-        }
-        return item;
-      });
-      return {...state, words: newWords};
-    case 'REMOVE_WORD':
-      newWords = state.words.filter((item) => {
-        if (item.id === action.id) {
-          return false;
-        }
-        return true;
-      });
-      return {...state, words: newWords};
-    case 'ADD_WORD':
-      const {words} = state;
-      newWords = Object.assign([], words);
-      const newWord = {
-        id: words.length + 1,
-        en: action.txtEn,
-        vn: action.txtVn,
-        isMemorized: false,
-      };
-      newWords.unshift(newWord);
-      return {...state, words: newWords};
-    case 'SET_FILTER_MODE':
-      return {...state, filterMode: action.filterMode};
-    default:
-      return state;
-  }
+const defaultWords = [
+  {id: 1, en: 'One', vn: 'Một', isMemorized: true},
+  {id: 2, en: 'Two', vn: 'Hai', isMemorized: false},
+  {id: 3, en: 'Three', vn: 'Ba', isMemorized: true},
+  {id: 4, en: 'Four', vn: 'Bốn', isMemorized: false},
+];
+
+function wordReducer(state = defaultWords, action) {
+  return state;
+}
+function filterModeReducer(state = '', action) {
+  return state;
+}
+
+const rootReducer = combineReducers({
+  words: wordReducer,
+  filterMode: filterModeReducer,
 });
+
+const store = createStore(rootReducer);
 
 export default class App extends Component {
   render() {
@@ -79,3 +50,44 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
 });
+
+// (state = defaultState, action) => {
+//   let newWords = null;
+//   switch (action.type) {
+//     case 'TOGGLE_WORD':
+//       newWords = state.words.map((item) => {
+//         if (item.id === action.id) {
+//           const newWord = {
+//             ...item,
+//             isMemorized: !item.isMemorized,
+//           };
+//           return newWord;
+//         }
+//         return item;
+//       });
+//       return {...state, words: newWords};
+//     case 'REMOVE_WORD':
+//       newWords = state.words.filter((item) => {
+//         if (item.id === action.id) {
+//           return false;
+//         }
+//         return true;
+//       });
+//       return {...state, words: newWords};
+//     case 'ADD_WORD':
+//       const {words} = state;
+//       newWords = Object.assign([], words);
+//       const newWord = {
+//         id: words.length + 1,
+//         en: action.txtEn,
+//         vn: action.txtVn,
+//         isMemorized: false,
+//       };
+//       newWords.unshift(newWord);
+//       return {...state, words: newWords};
+//     case 'SET_FILTER_MODE':
+//       return {...state, filterMode: action.filterMode};
+//     default:
+//       return state;
+//   }
+// }
