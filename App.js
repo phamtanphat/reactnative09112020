@@ -31,11 +31,35 @@ function wordReducer(state = defaultWords, action) {
         return item;
       });
       return newWords;
+    case 'REMOVE_WORD':
+      newWords = state.filter((item) => {
+        if (item.id === action.id) {
+          return false;
+        }
+        return true;
+      });
+      return newWords;
+    case 'ADD_WORD':
+      newWords = Object.assign([], state);
+      const newWord = {
+        id: state.length + 1,
+        en: action.txtEn,
+        vn: action.txtVn,
+        isMemorized: false,
+      };
+      newWords.unshift(newWord);
+      return newWords;
+    default:
+      return state;
   }
-  return state;
 }
 function filterModeReducer(state = '', action) {
-  return state;
+  switch (action.type) {
+    case 'SET_FILTER_MODE':
+      return action.filterMode;
+    default:
+      return state;
+  }
 }
 
 const rootReducer = combineReducers({
@@ -65,31 +89,3 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
 });
-
-// (state = defaultState, action) => {
-
-//     case 'REMOVE_WORD':
-//       newWords = state.words.filter((item) => {
-//         if (item.id === action.id) {
-//           return false;
-//         }
-//         return true;
-//       });
-//       return {...state, words: newWords};
-//     case 'ADD_WORD':
-//       const {words} = state;
-//       newWords = Object.assign([], words);
-//       const newWord = {
-//         id: words.length + 1,
-//         en: action.txtEn,
-//         vn: action.txtVn,
-//         isMemorized: false,
-//       };
-//       newWords.unshift(newWord);
-//       return {...state, words: newWords};
-//     case 'SET_FILTER_MODE':
-//       return {...state, filterMode: action.filterMode};
-//     default:
-//       return state;
-//   }
-// }
