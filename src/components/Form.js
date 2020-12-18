@@ -8,6 +8,7 @@ import {
   Keyboard,
 } from 'react-native';
 import {connect} from 'react-redux';
+import actionCreators from '../redux/action/actionCreators';
 
 class Form extends Component {
   constructor(props) {
@@ -23,7 +24,7 @@ class Form extends Component {
     if (txtEn.length === 0 || txtVn.length === 0) {
       return alert('Chưa nhập đủ thông tin');
     }
-    this.props.dispatch({type: 'ADD_WORD', txtEn, txtVn});
+    this.props.addWord(txtEn, txtVn);
     this.inputTextEn.clear();
     this.inputTextVn.clear();
     Keyboard.dismiss();
@@ -78,7 +79,7 @@ class Form extends Component {
   }
 }
 
-export default connect()(Form);
+export default connect(null, actionCreators)(Form);
 
 const styles = StyleSheet.create({
   containerTextInput: {

@@ -4,8 +4,18 @@ import AppDimensions from '../helpers/AppDimensions';
 import Word from '../components/Word';
 import Form from '../components/Form';
 import Filter from '../components/Filter';
+import Axios from 'axios';
 
 export default class Main extends Component {
+  componentDidMount() {
+    const URL = 'https://servertuvung09112020.herokuapp.com/word';
+    // Axios.get(URL)
+    //   .then((response) => console.log(response.data))
+    //   .catch((error) => console.log(error));
+    Axios.post(URL, {en: 'Three', vn: 'Ba'})
+      .then((response) => console.log(response.data))
+      .catch((error) => console.log(error));
+  }
   render() {
     return (
       <View style={styles.container}>

@@ -1,0 +1,3 @@
+const ACTION_TYPE_ADD_WORD = 'ADD_WORD';
+
+export default {ACTION_TYPE_ADD_WORD};
