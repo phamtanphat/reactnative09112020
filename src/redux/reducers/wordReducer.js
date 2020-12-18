@@ -1,13 +1,9 @@
-const defaultWords = [
-  {id: 1, en: 'One', vn: 'Một', isMemorized: true},
-  {id: 2, en: 'Two', vn: 'Hai', isMemorized: false},
-  {id: 3, en: 'Three', vn: 'Ba', isMemorized: true},
-  {id: 4, en: 'Four', vn: 'Bốn', isMemorized: false},
-];
-
-const wordReducer = (state = defaultWords, action) => {
+const wordReducer = (state = [], action) => {
   let newWords = null;
   switch (action.type) {
+    case 'FETCH_WORDS': {
+      return action.words;
+    }
     case 'TOGGLE_WORD':
       newWords = state.map((item) => {
         if (item.id === action.id) {

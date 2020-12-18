@@ -6,6 +6,9 @@ import {connect} from 'react-redux';
 import actionCreators from '../redux/action/actionCreators';
 
 class Word extends Component {
+  componentDidMount(){
+    this.props.fetchWords();
+  }
   onToggleWord = (id) => {
     this.props.toggleWord(id);
   };
@@ -18,7 +21,7 @@ class Word extends Component {
         <FlatList
           data={this.props.words}
           extraData={this.props.filterMode}
-          keyExtractor={(item, index) => item.id.toString()}
+          keyExtractor={(item, index) => item._id.toString()}
           renderItem={({item}) => (
             <WordItem
               item={item}
