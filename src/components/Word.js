@@ -6,11 +6,11 @@ import {connect} from 'react-redux';
 import actionCreators from '../redux/action/actionCreators';
 
 class Word extends Component {
-  componentDidMount(){
+  componentDidMount() {
     this.props.fetchWords();
   }
-  onToggleWord = (id) => {
-    this.props.toggleWord(id);
+  onToggleWord = (_id, ismemorized) => {
+    this.props.toggleWord(_id, ismemorized);
   };
   onRemoveWord = (id) => {
     this.props.removeWord(id);

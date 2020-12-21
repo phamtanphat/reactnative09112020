@@ -6,12 +6,8 @@ const wordReducer = (state = [], action) => {
     }
     case 'TOGGLE_WORD':
       newWords = state.map((item) => {
-        if (item.id === action.id) {
-          const newWord = {
-            ...item,
-            isMemorized: !item.isMemorized,
-          };
-          return newWord;
+        if (item._id === action._id) {
+          return action.word;
         }
         return item;
       });

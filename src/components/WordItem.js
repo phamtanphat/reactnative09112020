@@ -6,7 +6,7 @@ import AppDimensions from '../helpers/AppDimensions';
 export default class WordItem extends Component {
   shouldComponentUpdate(nextProps, nextState) {
     if (
-      nextProps.item.isMemorized === this.props.item.isMemorized &&
+      nextProps.item.ismemorized === this.props.item.ismemorized &&
       nextProps.filterMode === this.props.filterMode
     ) {
       return false;
@@ -14,9 +14,9 @@ export default class WordItem extends Component {
     return true;
   }
   renderItemWord = (word, filterMode) => {
-    if (filterMode === 'Show_Forgot' && !word.isMemorized) {
+    if (filterMode === 'Show_Forgot' && !word.ismemorized) {
       return null;
-    } else if (filterMode === 'Show_Memorized' && word.isMemorized) {
+    } else if (filterMode === 'Show_Memorized' && word.ismemorized) {
       return null;
     }
     return (
@@ -24,18 +24,18 @@ export default class WordItem extends Component {
         <View style={styles.containerText}>
           <Text style={styles.textEn}>{word.en}</Text>
           <Text style={styles.textVn}>
-            {word.isMemorized ? '----' : word.vn}
+            {word.ismemorized ? '----' : word.vn}
           </Text>
         </View>
         <View style={styles.containerTouchable}>
           <TouchableOpacity
-            onPress={() => this.props.onToggleWord(word._id)}
+            onPress={() => this.props.onToggleWord(word._id, !word.ismemorized)}
             style={{
               ...styles.touchableMemorized,
-              backgroundColor: word.isMemorized ? '#28a845' : '#DD3444',
+              backgroundColor: word.ismemorized ? '#28a845' : '#DD3444',
             }}>
             <Text style={styles.textSize}>
-              {word.isMemorized ? 'Forgot' : 'Memorized'}
+              {word.ismemorized ? 'Forgot' : 'Memorized'}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
