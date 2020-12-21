@@ -11,7 +11,8 @@ export default class Loading extends Component {
           flex: 1,
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor: 'lightgrey',
+          backgroundColor: 'rgba(256,256,256,0.5)',
+          ...this.props.styles,
         }}>
         <DotIndicator color="blue" count={3} size={10} />
       </View>

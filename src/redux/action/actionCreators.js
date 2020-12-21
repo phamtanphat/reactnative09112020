@@ -36,6 +36,7 @@ function fetchWords() {
         dispatch({
           type: actionTypes.ACTION_TYPE_FETCH_WORDS,
           words: data.words,
+          loading: false,
         });
       }
     });

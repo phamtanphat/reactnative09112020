@@ -1,31 +1,42 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
 import {View, StyleSheet, Keyboard} from 'react-native';
 import AppDimensions from '../helpers/AppDimensions';
 import Word from '../components/Word';
 import Form from '../components/Form';
 import Filter from '../components/Filter';
-import Axios from 'axios';
+import {connect} from 'react-redux';
+import Loading from '../components/Loading';
 
-export default class Main extends Component {
-  componentDidMount() {
-    const URL = 'https://servertuvung09112020.herokuapp.com/word';
-    // Axios.get(URL)
-    //   .then((response) => console.log(response.data))
-    //   .catch((error) => console.log(error));
-    Axios.post(URL, {en: 'Three', vn: 'Ba'})
-      .then((response) => console.log(response.data))
-      .catch((error) => console.log(error));
-  }
+class Main extends Component {
+  showLoading = () => {
+    if (this.props.loading) {
+      return (
+        <View style={{position: 'absolute', width: '100%', height: '100%'}}>
+          <Loading />
+        </View>
+      );
+    } else {
+      return null;
+    }
+  };
   render() {
     return (
       <View style={styles.container}>
         <Form />
         <Filter />
         <Word />
+        {this.showLoading()}
       </View>
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {loading: state.loading};
+};
+
+export default connect(mapStateToProps)(Main);
 
 const styles = StyleSheet.create({
   container: {
