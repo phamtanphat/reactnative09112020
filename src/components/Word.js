@@ -12,8 +12,8 @@ class Word extends Component {
   onToggleWord = (_id, ismemorized) => {
     this.props.toggleWord(_id, ismemorized);
   };
-  onRemoveWord = (id) => {
-    this.props.removeWord(id);
+  onRemoveWord = (_id) => {
+    this.props.removeWord(_id);
   };
   render() {
     return (

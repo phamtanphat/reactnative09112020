@@ -20,8 +20,17 @@ function toggleWord(_id, ismemorized) {
   };
 }
 
-function removeWord(id) {
-  return {type: actionTypes.ACTION_TYPE_REMOVE_WORD, id};
+function removeWord(_id) {
+  return (dispatch) => {
+    Axios.delete(URL + `word/${_id}`)
+      .then((response) => {
+        const {success, word} = response.data;
+        if (success) {
+          dispatch({type: actionTypes.ACTION_TYPE_REMOVE_WORD, _id});
+        }
+      })
+      .catch((error) => console.log(error));
+  };
 }
 
 function setFilterMode(filterMode) {

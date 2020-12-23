@@ -14,7 +14,7 @@ const wordReducer = (state = [], action) => {
       return newWords;
     case 'REMOVE_WORD':
       newWords = state.filter((item) => {
-        if (item.id === action.id) {
+        if (item._id === action._id) {
           return false;
         }
         return true;
