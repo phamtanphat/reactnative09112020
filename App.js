@@ -8,6 +8,7 @@ import Filter from './src/components/Filter';
 import Word from './src/components/Word';
 import {Provider} from 'react-redux';
 import store from './src/redux/store';
+import MyModal from './src/components/MyModal';
 
 export default class App extends Component {
   render() {
@@ -15,9 +16,10 @@ export default class App extends Component {
       <SafeAreaView style={styles.container}>
         {/* <Box /> */}
         {/* <Form /> */}
-        <Provider store={store}>
+        {/* <Provider store={store}>
           <Main />
-        </Provider>
+        </Provider> */}
+        <MyModal />
       </SafeAreaView>
     );
   }
