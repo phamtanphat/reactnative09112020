@@ -15,7 +15,10 @@ export default class MyModal extends Component {
   render() {
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Modal transparent={true} visible={this.state.modalVisible}>
+        <Modal
+          animationType="fade"
+          transparent={true}
+          visible={this.state.modalVisible}>
           <View
             style={{
               justifyContent: 'center',
@@ -28,18 +31,40 @@ export default class MyModal extends Component {
                 borderRadius: 5,
                 borderBottomColor: 'blue',
                 borderColor: 'black',
-                width: 300,
-                height: 300,
+                width: 270,
+                height: 150,
                 backgroundColor: 'whitesmoke',
-                justifyContent: 'center',
                 alignItems: 'center',
               }}>
-              <Text>Hộp thoại</Text>
-              <TouchableOpacity
-                onPress={this.toggleModal}
-                style={{backgroundColor: 'green', padding: 10}}>
-                <Text style={{color: 'white'}}>Close modal</Text>
-              </TouchableOpacity>
+              <Text
+                style={{
+                  color: 'red',
+                  fontSize: 15,
+                  fontWeight: 'bold',
+                  marginTop: 25,
+                }}>
+                Bạn muốn xoá từ vựng này không?
+              </Text>
+              <View style={{flexDirection: 'row', marginTop: 30}}>
+                <TouchableOpacity
+                  style={{
+                    backgroundColor: 'red',
+                    padding: 10,
+                    marginRight: 30,
+                    borderRadius: 5,
+                  }}>
+                  <Text style={{color: 'white'}}>Đồng ý</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={this.toggleModal}
+                  style={{
+                    backgroundColor: 'green',
+                    padding: 10,
+                    borderRadius: 5,
+                  }}>
+                  <Text style={{color: 'white'}}>Huỷ bỏ</Text>
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
         </Modal>
