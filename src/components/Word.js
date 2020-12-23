@@ -13,7 +13,8 @@ class Word extends Component {
     this.props.toggleWord(_id, ismemorized);
   };
   onRemoveWord = (_id) => {
-    this.props.removeWord(_id);
+    // console.log(this.props);
+    // this.props.removeWord(_id);
   };
   render() {
     return (

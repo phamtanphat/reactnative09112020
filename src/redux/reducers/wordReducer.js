@@ -22,13 +22,7 @@ const wordReducer = (state = [], action) => {
       return newWords;
     case 'ADD_WORD':
       newWords = Object.assign([], state);
-      const newWord = {
-        id: state.length + 1,
-        en: action.txtEn,
-        vn: action.txtVn,
-        isMemorized: false,
-      };
-      newWords.unshift(newWord);
+      newWords.unshift(action.newWord);
       return newWords;
     default:
       return state;

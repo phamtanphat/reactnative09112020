@@ -4,7 +4,16 @@ import Axios from 'axios';
 const URL = 'https://servertuvung09112020.herokuapp.com/';
 
 function addWord(txtEn, txtVn) {
-  return {type: actionTypes.ACTION_TYPE_ADD_WORD, txtEn, txtVn};
+  return (dispatch) => {
+    Axios.post(URL + 'word', {en: txtEn, vn: txtVn})
+      .then((response) => {
+        const {success, word} = response.data;
+        if (success) {
+          dispatch({type: actionTypes.ACTION_TYPE_ADD_WORD, newWord: word});
+        }
+      })
+      .catch((error) => console.log(error));
+  };
 }
 
 function toggleWord(_id, ismemorized) {

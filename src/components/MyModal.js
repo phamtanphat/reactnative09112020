@@ -9,72 +9,64 @@ export default class MyModal extends Component {
       modalVisible: false,
     };
   }
-  toggleModal = () => {
-    this.setState({modalVisible: !this.state.modalVisible});
+  onShowModal = () => {
+    this.setState({modalVisible: true});
   };
   render() {
     return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Modal
-          animationType="fade"
-          transparent={true}
-          visible={this.state.modalVisible}>
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={this.state.modalVisible}>
+        <View
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '100%',
+            height: '100%',
+          }}>
           <View
             style={{
-              justifyContent: 'center',
+              borderRadius: 5,
+              borderBottomColor: 'blue',
+              borderColor: 'black',
+              width: 270,
+              height: 150,
+              backgroundColor: 'whitesmoke',
               alignItems: 'center',
-              width: '100%',
-              height: '100%',
             }}>
-            <View
+            <Text
               style={{
-                borderRadius: 5,
-                borderBottomColor: 'blue',
-                borderColor: 'black',
-                width: 270,
-                height: 150,
-                backgroundColor: 'whitesmoke',
-                alignItems: 'center',
+                color: 'red',
+                fontSize: 15,
+                fontWeight: 'bold',
+                marginTop: 25,
               }}>
-              <Text
+              Bạn muốn xoá từ vựng này không?
+            </Text>
+            <View style={{flexDirection: 'row', marginTop: 30}}>
+              <TouchableOpacity
                 style={{
-                  color: 'red',
-                  fontSize: 15,
-                  fontWeight: 'bold',
-                  marginTop: 25,
+                  backgroundColor: 'red',
+                  padding: 10,
+                  marginRight: 30,
+                  borderRadius: 5,
                 }}>
-                Bạn muốn xoá từ vựng này không?
-              </Text>
-              <View style={{flexDirection: 'row', marginTop: 30}}>
-                <TouchableOpacity
-                  style={{
-                    backgroundColor: 'red',
-                    padding: 10,
-                    marginRight: 30,
-                    borderRadius: 5,
-                  }}>
-                  <Text style={{color: 'white'}}>Đồng ý</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={this.toggleModal}
-                  style={{
-                    backgroundColor: 'green',
-                    padding: 10,
-                    borderRadius: 5,
-                  }}>
-                  <Text style={{color: 'white'}}>Huỷ bỏ</Text>
-                </TouchableOpacity>
-              </View>
+                <Text style={{color: 'white'}}>Đồng ý</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={this.toggleModal}
+                style={{
+                  backgroundColor: 'green',
+                  padding: 10,
+                  borderRadius: 5,
+                }}>
+                <Text style={{color: 'white'}}>Huỷ bỏ</Text>
+              </TouchableOpacity>
             </View>
           </View>
-        </Modal>
-
-        <TouchableOpacity
-          onPress={this.toggleModal}
-          style={{backgroundColor: 'green', padding: 10}}>
-          <Text style={{color: 'white'}}>Open modal</Text>
-        </TouchableOpacity>
-      </View>
+        </View>
+      </Modal>
     );
   }
 }

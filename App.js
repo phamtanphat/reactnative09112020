@@ -16,10 +16,9 @@ export default class App extends Component {
       <SafeAreaView style={styles.container}>
         {/* <Box /> */}
         {/* <Form /> */}
-        {/* <Provider store={store}>
+        <Provider store={store}>
           <Main />
-        </Provider> */}
-        <MyModal />
+        </Provider>
       </SafeAreaView>
     );
   }

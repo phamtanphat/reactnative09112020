@@ -7,6 +7,7 @@ import Form from '../components/Form';
 import Filter from '../components/Filter';
 import {connect} from 'react-redux';
 import Loading from '../components/Loading';
+import MyModal from '../components/MyModal';
 
 class Main extends Component {
   showLoading = () => {
