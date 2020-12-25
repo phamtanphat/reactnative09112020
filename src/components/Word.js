@@ -1,20 +1,25 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
-import {FlatList, View} from 'react-native';
+import {FlatList, View , Modal} from 'react-native';
 import WordItem from './WordItem';
 import {connect} from 'react-redux';
 import actionCreators from '../redux/action/actionCreators';
 
 class Word extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      modalVisible: false,
+    };
+  }
   componentDidMount() {
     this.props.fetchWords();
   }
+  onRemoveWord = (_id) => {
+    this.props.removeWord(_id);
+  };
   onToggleWord = (_id, ismemorized) => {
     this.props.toggleWord(_id, ismemorized);
-  };
-  onRemoveWord = (_id) => {
-    // console.log(this.props);
-    // this.props.removeWord(_id);
   };
   render() {
     return (
@@ -26,6 +31,7 @@ class Word extends Component {
           renderItem={({item}) => (
             <WordItem
               item={item}
+              modal={this.modal}
               filterMode={this.props.filterMode}
               onToggleWord={this.onToggleWord}
               onRemoveWord={this.onRemoveWord}

@@ -12,6 +12,9 @@ export default class MyModal extends Component {
   onShowModal = () => {
     this.setState({modalVisible: true});
   };
+  onHideModal = () => {
+    this.setState({modalVisible: false});
+  };
   render() {
     return (
       <Modal
@@ -46,6 +49,7 @@ export default class MyModal extends Component {
             </Text>
             <View style={{flexDirection: 'row', marginTop: 30}}>
               <TouchableOpacity
+                onPress={() => this.onListenModal(0)}
                 style={{
                   backgroundColor: 'red',
                   padding: 10,
@@ -55,7 +59,7 @@ export default class MyModal extends Component {
                 <Text style={{color: 'white'}}>Đồng ý</Text>
               </TouchableOpacity>
               <TouchableOpacity
-                onPress={this.toggleModal}
+                onPress={() => this.onListenModal(1)}
                 style={{
                   backgroundColor: 'green',
                   padding: 10,
